@@ -1,0 +1,1 @@
+g++ ./srcs/class/*.cpp ./srcs/*.cpp -I includes/ -o SpringMass

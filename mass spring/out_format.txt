@@ -1,0 +1,3 @@
+n <-- number of line
+
+n next line (x, y) for each mass point position
