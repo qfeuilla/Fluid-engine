@@ -30,7 +30,7 @@ public:
     double dragCoefficient = 0.1;
 
     double floorPositionY = -7.0;
-    double restitusionCoefficient = 0.1;
+    double restitusionCoefficient = 0.8;
 
     Vector3d windDir;
 
