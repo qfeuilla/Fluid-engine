@@ -21,3 +21,23 @@ I think I will implement a particule based simulation (SPH). The main reason is 
 
 But i found that there is a lot of different way to do particule based fluid simulation so now i have to found them all and compare them to choose the better one compared to my needings
 
+### 02/03/2020
+
+I have found this repo that is realy intresting
+https://github.com/InteractiveComputerGraphics/SPlisHSPlasH
+
+As far as this repo say, there is 5 diferent SPH solver : WCSPH, PCISPH, PBF, IISPH, DFSPH
+
+- #### PBF (position base fluids) : 
+	
+	Pros : 
+		
+	-	design for realtime
+	
+	Cons :
+		
+	-	require  a  notion  of  incompressibility and to do so it uses a iterative aproch. "Iterative process suffers from low convergence rates when simulating large volumes with a large number of particles. In these cases, the required solver iterations have to be increased significantly, implying a huge impact on the runtime of the overall simulation." https://arxiv.org/ftp/arxiv/papers/1608/1608.04721.
+	
+	
+	
+I also learn that there is also a branch for interaction between solid and fluid object (dissolution for example) and it's called FSI (maybe later implementation)
