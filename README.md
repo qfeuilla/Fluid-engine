@@ -26,7 +26,7 @@ But i found that there is a lot of different way to do particule based fluid sim
 I have found this repo that is realy intresting
 https://github.com/InteractiveComputerGraphics/SPlisHSPlasH
 
-As far as this repo say, there is 5 diferent SPH solver : WCSPH, PCISPH, PBF, ISPH, DFSPH
+As far as this repo say, there is 5 diferent SPH solver : WCSPH, PCISPH, PBF, IISPH, DFSPH
 
 - #### PBF (position base fluids) : 
 	
@@ -40,8 +40,6 @@ As far as this repo say, there is 5 diferent SPH solver : WCSPH, PCISPH, PBF, IS
 	
 	
 I also learn that there is a branch in fluid simulation that simulate the interaction between solid and fluid object (dissolution for example) and it's called FSI (maybe later implementation)
-
-I've also seen that there is a technique that is used to accelerate the computation and it is called 
 
 - #### WCSPH (weakly compressible SPH) : 
 	stiff equation of state
@@ -62,3 +60,15 @@ I've also seen that there is a technique that is used to accelerate the computat
 	-	low cost / steps
 	-	Handle large time steps
 	-	77 time faster than WCSPH with multithread according to this paper https://people.inf.ethz.ch/~sobarbar/papers/Sol09b/Sol09b.pdf
+	
+- #### DFSPH (divergence free SPH) : 
+	It is a prediction model a bit like PCISPH but that take into acount the numerical error.
+	
+	Pros : 
+		
+	-	much more faster than other SPH for "Big" time step according to the end of this paper https://animation.rwth-aachen.de/media/papers/2015-SCA-DFSPH.pdf
+
+I have found a paper that seems interesting and i wait for the aproval of my account
+ https://www.researchgate.net/publication/318294651_Comparison_between_Incompressible_SPH_Solvers
+
+So after this searching process I think that for the moment i will use DFSPH solver that seem to suit my needing : fast simulator with low artifacts. the only negative point I see is that the fluid will be incompressible
