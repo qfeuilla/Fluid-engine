@@ -72,3 +72,7 @@ I have found a paper that seems interesting and i wait for the aproval of my acc
  https://www.researchgate.net/publication/318294651_Comparison_between_Incompressible_SPH_Solvers
 
 So after this searching process I think that for the moment i will use DFSPH solver that seem to suit my needing : fast simulator with low artifacts. the only negative point I see is that the fluid will be incompressible
+
+### 03/03/2020
+
+After reading some paper about the SPH I have seen a lot of terms that I don't understand so I will list theme and try to understand theme in a glossary that can be found in Glossary.md
