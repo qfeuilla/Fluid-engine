@@ -76,3 +76,7 @@ So after this searching process I think that for the moment i will use DFSPH sol
 ### 03/03/2020
 
 After reading some paper about the SPH I have seen a lot of terms that I don't understand so I will list theme and try to understand theme in a glossary that can be found in Glossary.md
+
+### 06/03/2020
+
+I am starting to understand the main lines of the solver now it is time for me to trying to find a good algoritm. My main goal is to have an algorithme that is the most optimized I can. I will focus on the display later. see DFSPH_algoritm.md
