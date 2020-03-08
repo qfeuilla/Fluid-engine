@@ -22,7 +22,7 @@ def runSimulation:
 	while actual_time < time_simulation:
 		for i, p in enumerate(particles):
 			forces[i] = calculateExtForces(p)  #  gravity,  surface  tension  and  viscosity
-        ∆t = CFL condition # i don't cleary understand how to compute and the meaning of this, adding to gloassary
+		∆t = CFL condition # i don't cleary understand how to compute and the meaning of this, adding to gloassary
 		for i, p in enumerate(particles):
 			actual_veloc[i] = prev_veloc[i] +  ∆t * (forces[i] / m[i])
 		correctDensityError(alpha, actual_veloc)
