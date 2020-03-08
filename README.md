@@ -84,3 +84,4 @@ I am starting to understand the main lines of the solver now it is time for me t
 ### 08/03/2020
 
 Now that i have an aproximal algorithm I will build step by step. So from now I will focus on the neighbour searching.
+From what I have read, it is the longest thing in the simulation so, I will try to do the state of the art algorithm, and to understand it.
