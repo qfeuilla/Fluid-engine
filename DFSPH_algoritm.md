@@ -46,3 +46,4 @@ I don't know what ∇ mean adding to Gloassary.
 ![alt text](https://raw.githubusercontent.com/qfeuilla/Fluid-engine/master/Wij.PNG)
 Gaussian like kernel function with the support radius h (I don't know what it is, adding to Gloassary)
 
+## j is a neighboring particle
