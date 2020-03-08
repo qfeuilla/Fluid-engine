@@ -14,3 +14,8 @@ def runSimulation:
     rho = findDensity(neighbors[i], p)
     
 ```
+## αi = 
+![alt text](https://raw.githubusercontent.com/qfeuilla/Fluid-engine/master/ai.PNG)
+
+## Wij :
+![alt text](https://raw.githubusercontent.com/qfeuilla/Fluid-engine/master/Wij.PNG)
