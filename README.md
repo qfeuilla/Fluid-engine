@@ -80,3 +80,7 @@ After reading some paper about the SPH I have seen a lot of terms that I don't u
 ### 06/03/2020
 
 I am starting to understand the main lines of the solver now it is time for me to trying to find a good algoritm. My main goal is to have an algorithme that is the most optimized I can. I will focus on the display later. see DFSPH_algoritm.md
+
+### 08/03/2020
+
+Now that i have an aproximal algorithm I will build step by step. So from now I will focus on the neighbour searching.
