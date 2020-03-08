@@ -25,7 +25,7 @@ def runSimulation:
 		∆t = CFL condition # i don't cleary understand how to compute and the meaning of this, adding to gloassary
 		for i, p in enumerate(particles):
 			actual_veloc[i] = prev_veloc[i] +  ∆t * (forces[i] / m[i])
-		correctDensityError(alpha, actual_veloc)
+		correctDensityError(alpha, actual_veloc, rho)
 		for i, p in enumerate(particles):
 			p.pos = p.pos + ∆t * actual_veloc[i]
 		for i, p in enumerate(particles):
@@ -33,7 +33,7 @@ def runSimulation:
 		for i, p in enumerate(particles):
 			rho[i] = findDensity(neighbors[i], p)
 			alpha[i] = findAlpha(neighbors[i], p)
-		correctDivergenceError(alpha, actual_veloc)
+		correctDivergenceError(alpha, actual_veloc, rho)
 		for i, p in enumerate(particles):
 			prev_veloc = actual_veloc
 		actual_time = actual_time + ∆t
