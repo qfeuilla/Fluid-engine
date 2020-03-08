@@ -22,3 +22,4 @@ I don't know what ∇ mean adding to Gloassary.
 ## Wij :
 ![alt text](https://raw.githubusercontent.com/qfeuilla/Fluid-engine/master/Wij.PNG)
 Gaussian like kernel function with the support radius h (I don't know what it adding to Gloassary)
+
