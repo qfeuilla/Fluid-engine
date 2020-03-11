@@ -85,3 +85,7 @@ I am starting to understand the main lines of the solver now it is time for me t
 
 Now that i have an aproximal algorithm I will build step by step. So from now I will focus on the neighbour searching.
 From what I have read, it is the longest thing in the simulation so, I will try to do the state of the art algorithm, and to understand it.
+
+### 11/03/2020
+
+After a lot of research, I have build a custom algorithm. The idea is that I group the particle into cell and I test the distance between each particules in each cell to group theme by neighbour. Furthermore, if particle is near a edge, I put in one of the case and then i group the cells in function of the case .
