@@ -21,3 +21,67 @@ I think I will implement a particule based simulation (SPH). The main reason is 
 
 But i found that there is a lot of different way to do particule based fluid simulation so now i have to found them all and compare them to choose the better one compared to my needings
 
+### 02/03/2020
+
+I have found this repo that is realy intresting
+https://github.com/InteractiveComputerGraphics/SPlisHSPlasH
+
+As far as this repo say, there is 5 diferent SPH solver : WCSPH, PCISPH, PBF, IISPH, DFSPH
+
+- #### PBF (position base fluids) : 
+	
+	Pros : 
+		
+	-	design for realtime
+	
+	Cons :
+		
+	-	require  a  notion  of  incompressibility and to do so it uses a iterative aproch. "Iterative process suffers from low convergence rates when simulating large volumes with a large number of particles. In these cases, the required solver iterations have to be increased significantly, implying a huge impact on the runtime of the overall simulation." https://arxiv.org/ftp/arxiv/papers/1608/1608.04721.
+	
+	
+I also learn that there is a branch in fluid simulation that simulate the interaction between solid and fluid object (dissolution for example) and it's called FSI (maybe later implementation)
+
+- #### WCSPH (weakly compressible SPH) : 
+	stiff equation of state
+	
+	Pros : 
+		
+	-	low cost / step
+	
+	Cons :
+		
+	-	only small time steps
+	
+- #### PCISPH (weakly compressible SPH) : 
+	prediction-correction scheme
+	
+	Pros : 
+		
+	-	low cost / steps
+	-	Handle large time steps
+	-	77 time faster than WCSPH with multithread according to this paper https://people.inf.ethz.ch/~sobarbar/papers/Sol09b/Sol09b.pdf
+	
+- #### DFSPH (divergence free SPH) : 
+	It is a prediction model a bit like PCISPH but that take into acount the numerical error.
+	
+	Pros : 
+		
+	-	much more faster than other SPH for "Big" time step according to the end of this paper https://animation.rwth-aachen.de/media/papers/2015-SCA-DFSPH.pdf
+
+I have found a paper that seems interesting and i wait for the aproval of my account
+ https://www.researchgate.net/publication/318294651_Comparison_between_Incompressible_SPH_Solvers
+
+So after this searching process I think that for the moment i will use DFSPH solver that seem to suit my needing : fast simulator with low artifacts. the only negative point I see is that the fluid will be incompressible
+
+### 03/03/2020
+
+After reading some paper about the SPH I have seen a lot of terms that I don't understand so I will list theme and try to understand theme in a glossary that can be found in Glossary.md
+
+### 06/03/2020
+
+I am starting to understand the main lines of the solver now it is time for me to trying to find a good algoritm. My main goal is to have an algorithme that is the most optimized I can. I will focus on the display later. see DFSPH_algoritm.md
+
+### 08/03/2020
+
+Now that i have an aproximal algorithm I will build step by step. So from now I will focus on the neighbour searching.
+From what I have read, it is the longest thing in the simulation so, I will try to do the state of the art algorithm, and to understand it.
