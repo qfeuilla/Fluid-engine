@@ -89,3 +89,8 @@ From what I have read, it is the longest thing in the simulation so, I will try 
 ### 11/03/2020
 
 After a lot of research, I have build a custom algorithm. The idea is that I group the particle into cell and I test the distance between each particules in each cell to group theme by neighbour. Furthermore, if particle is near a edge, I put in one of the case and then i group the cells in function of the case .
+
+
+### 13/03/2020
+
+So I have finished to implement my temporary algorithm for neighbor search. it takes 10 seconds for 500 000 particules without GPU and multithreading. I will try to decrease it to 10 ms for each time step, but i need to learn to use CUDA for that so I will focus on optimization later on.
