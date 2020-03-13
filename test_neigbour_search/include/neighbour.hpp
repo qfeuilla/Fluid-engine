@@ -12,10 +12,14 @@
 
 class  Vector3d {
 public:
-    float x, y, z;
+	float x, y, z;
 
-    Vector3d() : x(0), y(0), z(0) {}
-    Vector3d(float x, float y, float z) : x(x), y(y), z(z) {}
+	Vector3d() : x(0), y(0), z(0) {}
+	Vector3d(float x, float y, float z) : x(x), y(y), z(z) {}
 };
+
+float xm = 100, ym = 100, zm = 100;
+float h = 4; // size of the edge of the cube
+int xmh = xm / h, ymh = ym / h, zmh = zm / h;
 
 #endif
