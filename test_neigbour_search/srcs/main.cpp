@@ -70,130 +70,150 @@ std::deque<int>     getCellGroup(int type, int cell) {
 			break;
 
 		case 7:
-			
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z - 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z - 1)));
 			break;
 
 		case 8:
-			
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z - 1))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z - 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z - 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z - 1)));
 			break;
 
 		case 9:
-			
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y - 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z)));
 			break;
 
 		case 10:
-			
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z)));
 			break;
 
 		case 11:
-			
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y - 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z)));
 			break;
 
 		case 12:
-			
-			break;
-
-		case 13:
-			
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z)));
 			break;
 
 		case 14:
-			
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z)));
 			break;
 
 		case 15:
-			
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
 			break;
 
 		case 16:
-			
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
 			break;
 
 		case 17:
-			
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
 			break;
 
 		case 18:
-			
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y - 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z + 1))); 
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y - 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 19:
-			
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 20:
-			
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y - 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z + 1))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y - 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 21:
-			
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 22:
-			
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 23:
-			
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 24:
-			
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z + 1))); 
+			group.push_back(vecToIndex(Vector3d(c.x - 1, c.y + 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 25:
-			
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		case 26:
-			
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z)));
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z + 1))); 
+			group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z + 1)));
+			group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1)));
 			break;
 
 		default:
 			break;
 	}
 
-	/*
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y - 1, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y - 1, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y - 1, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y + 1, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y + 1, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x - 1, c.y + 1, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y - 1, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x, c.y + 1, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y - 1, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y - 1, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y - 1, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y, c.z + 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z - 1))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z))); 
-	group.push_back(vecToIndex(Vector3d(c.x + 1, c.y + 1, c.z + 1))); */
 	return (group);
+}
+
+float dist(Vector3d a, Vector3d b) {
+	return (std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2) + std::pow(a.z - b.z, 2)));
 }
 
 std::map<int, std::deque<int>> getNeighbour(std::deque<Vector3d> particles) {
 	long int indice;
 	int type;
-	std::map<int, std::deque<int>> buckets;
+	std::map<long int, std::deque<int>> buckets;
 	std::map<int, std::map<int, std::deque<int>>> types;
 	std::map<int, std::deque<int>> neighbour;
 	std::deque<int> group;
 	float x,y,z;
 	Vector3d tmp;
-	float doi = 2; // distance of interaction
+	float doi = 1; // distance of interaction
 	int part_index = 0;
 
 	for(Vector3d p: particles) {
@@ -202,7 +222,7 @@ std::map<int, std::deque<int>> getNeighbour(std::deque<Vector3d> particles) {
 		x = std::round(std::fmod(tmp.x, 1) * 2);
 		y = std::round(std::fmod(tmp.y, 1) * 2);
 		z = std::round(std::fmod(tmp.z, 1) * 2);
-		type = static_cast<int>(x + y * 3 + z * 9);
+		type = static_cast<long int>(x + y * 3 + z * 9);
 		buckets[indice].push_back(part_index);
 		types[indice][type].push_back(part_index++);
 	}
@@ -211,18 +231,25 @@ std::map<int, std::deque<int>> getNeighbour(std::deque<Vector3d> particles) {
 	for (std::pair<int, std::deque<int>> cell: buckets) {
 		for (std::pair<int, std::deque<int>> groups: types[cell.first]) {
 			group = getCellGroup(groups.first, cell.first);
-			for (int particule: groups.second) {
+			for (int particle: groups.second) {
 				for (int g: group) {
 					for (int possible: buckets[g]) {
-
+						if (dist(particles[possible], particles[particle]) < doi) {
+							neighbour[particle].push_back(possible);
+						}
 					}
 				}
 			}
-			//std::cout << cell.first << " : type (" << groups.first << ") with number of particule :" << groups.second.size() << std::endl;
 		}
 	}
 
-	std::cout << buckets[-1].size() << std::endl;
+	for (std::pair<int, std::deque<int>> neig: neighbour) {
+		std::cout << neig.first << " : ";
+		for (int part: neig.second) {
+			std::cout << part << " ";
+		}
+		std::cout << std::endl;
+	}
 
 	return (neighbour);
 }

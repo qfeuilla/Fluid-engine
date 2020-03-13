@@ -19,7 +19,7 @@ public:
 };
 
 float xm = 100, ym = 100, zm = 100;
-float h = 4; // size of the edge of the cube
+float h = 3; // size of the edge of the cube
 int xmh = xm / h, ymh = ym / h, zmh = zm / h;
 
 #endif
