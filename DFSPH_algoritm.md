@@ -15,13 +15,14 @@ prev_veloc = [vec(0) for _ in range(len(particles))];
 
 def runSimulation:
 	for i, p in enumerate(particles):
-		neighbors[i] = findNeighbors(p, particles) # using compact hashing (to research)
+		neighbors[i] = findNeighbors(p, particles)
 	for i, p in enumerate(particles):
 		rho[i] = findDensity(neighbors[i], p)
 		alpha[i] = findAlpha(neighbors[i], p)
 	while actual_time < time_simulation:
 		for i, p in enumerate(particles):
-			forces[i] = calculateExtForces(p)  #  gravity,  surface  tension  and  viscosity
+			forces[i] = calculateExtForces(p)  #  gravity,  surface  tension, viscosity (and later on, 
+							   #			handling the bounciness on other objects)
 		∆t = CFL condition # i don't cleary understand how to compute and the meaning of this, adding to gloassary
 		for i, p in enumerate(particles):
 			actual_veloc[i] = prev_veloc[i] +  ∆t * (forces[i] / m[i])

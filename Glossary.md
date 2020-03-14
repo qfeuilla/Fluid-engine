@@ -22,3 +22,7 @@ Kinematic viscosity can be obtained by dividing the absolute viscosity of a flui
 
 describes the time rate of change of some physical quantity (like heat or momentum)
 of a material element that is subjected to a space-and-time-dependent velocity field.
+
+## The gaussian kernel function :
+
+![alt text](https://raw.githubusercontent.com/qfeuilla/Fluid-engine/master/gaussian_kernel_function.PNG)
