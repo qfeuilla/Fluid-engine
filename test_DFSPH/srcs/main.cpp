@@ -255,25 +255,48 @@ std::map<int, std::deque<int>> getNeighbour(std::deque<Vector3d> particles) {
 
 #define PI 355/113
 
-float GaussianKernelFuncion(Vector3d x, float h) {
-    float denom;
-    float num;
+float CubicSplineFuncion(float s, float h) {
+    float alphad;
 
-    denom = std::pow(std::sqrt(2 * PI) * h, 3);
-    num = std::pow(x.x, 2) + std::pow(x.y, 2) + std::pow(x.z, 2);
-    return ((1 / denom) * std::exp(-(num / (2 * std::pow(h, 2)))));
+	alphad = 1 / (4 * PI * std::pow(h,3));
+	if (s >= 0 && s < 1)
+		return(alphad * (std::pow(2 - s, 3) - (4 * std::pow(1 - s, 3))));
+	else if (s < 2 && s >= 0) {
+		return (alphad * std::pow(2 - s, 3));
+	} else {
+		return (0);
+	}
+}
+
+float CubicSplineFuncionGrad(float s, float h) {
+    float alphad;
+
+	alphad = 1 / (4 * PI * std::pow(h,3));
+	if (s >= 0 && s < 1)
+		return(alphad * ((3 * std::pow(2 - s, 2)) - (4 * (3 * std::pow(1 - s, 2)))));
+	else if (s < 2 && s >= 0) {
+		return (alphad * (3 * std::pow(2 - s, 2)));
+	} else {
+		return (0);
+	}
 }
 
 std::map<int, float> getAlpha(std::map<int, std::deque<int>> neig, std::deque<Vector3d> particules) {
-    float sum;
+    float sum1;
+	float sum2;
+	float gauss;
+
     std::map<int, float> ret;
 
     for (std::pair<int, std::deque<int>> particule : neig) {
-        sum = 0;
-        for (int nb: particule.second) {
-            sum += GaussianKernelFuncion(particules[particule.first] - particules[nb], h);
+        sum1 = 0;
+        sum2 = 0;
+		for (int nb: particule.second) {
+			gauss = CubicSplineFuncionGrad(dist(particules[particule.first], particules[nb]), h);
+            sum1 += pm * gauss;
+			sum2 += std::pow(pm * gauss, 2);
         }
-        ret[particule.first] = sum;
+        ret[particule.first] = std::pow(sum1, 2) + sum2;
     }
     return(ret);
 }
@@ -285,16 +308,21 @@ std::map<int, float> getDensity(std::map<int, std::deque<int>> neig, std::deque<
     for (std::pair<int, std::deque<int>> particule : neig) {
         sum = 0;
         for (int nb: particule.second) {
-            sum += GaussianKernelFuncion(particules[particule.first] - particules[nb], h);
+            sum += pm * CubicSplineFuncion(dist(particules[particule.first], particules[nb]), h);
         }
         ret[particule.first] = sum;
     }
     return(ret);
 }
+/*
+std::deque<float> ComputeForces(std::map<int, std::deque<int>> neig, std::deque<Vector3d> particules) {
 
+}
+*/
 int main(int ac, char **av) {
 	std::deque<Vector3d> particles;
 	std::map<int, std::deque<int>> neighbour;
+	std::map<int, float> alphas;
 	std::map<int, float> densities;
 
 	// max x y z
@@ -327,5 +355,9 @@ int main(int ac, char **av) {
 
 	neighbour = getNeighbour(particles);
 	densities = getDensity(neighbour,  particles);
-
+	alphas = getAlpha(neighbour, particles);
+	/*
+	for (std::pair<int, float> al: alphas) {
+		std::cout << al.first << " : " << al.second << std::endl;
+	}*/
 }

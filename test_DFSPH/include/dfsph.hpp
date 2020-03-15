@@ -21,6 +21,8 @@ public:
 
 float xm = 100, ym = 100, zm = 100;
 float h = 2; // size of the edge of the cube
+float k = 2;
 int xmh = xm / h, ymh = ym / h, zmh = zm / h;
+float pm = std::pow(10, -3); // mass of a particle
 
 #endif
