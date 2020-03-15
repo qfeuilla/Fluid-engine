@@ -102,3 +102,4 @@ I have done the computation for rho and for alpha, now I have to compute the ext
 
 ## 15/03/2020
 I have read that Cubic Spline Kernel is less computationaly expensive so I will use that instead of gaussian kernel.
+https://www.sciencedirect.com/science/article/pii/S0307904X13007920 -> more precisions about kernels
