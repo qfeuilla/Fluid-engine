@@ -98,4 +98,7 @@ Now let's try to implement a fonction that compute the density rho
 
 ### 14/03/2020
 
-I have done the computation for rho and for alpha, now I have to compute the external force : the gravity, the viscosity and the surface tension 
+I have done the computation for rho and for alpha, now I have to compute the external force : the gravity, the viscosity and the surface tension.
+
+## 15/03/2020
+I have read that Cubic Spline Kernel is less computationaly expensive so I will use that instead of gaussian kernel.
