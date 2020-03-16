@@ -314,16 +314,38 @@ std::map<int, float> getDensity(std::map<int, std::deque<int>> neig, std::deque<
     }
     return(ret);
 }
-/*
-std::deque<float> ComputeForces(std::map<int, std::deque<int>> neig, std::deque<Vector3d> particules) {
 
+float viscosity_kernel_laplacian(float r, float radius) {
+	return (r <= radius) ? (45.0f * (radius - r) / (PI * powf(radius, 6))) : 0.0f;
 }
-*/
+
+std::deque<Vector3d> ComputeForces(std::map<int, std::deque<int>> neighbour, std::deque<Vector3d> particles, std::deque<float> mass, float g, std::deque<Vector3d> velocities) {
+	std::deque<Vector3d> vel;
+	Vector3d a;
+	Vector3d b;
+	Vector3d tmp;
+
+	for (int i = 0; i < particles.size(); i++) {
+		tmp = Vector3d(0, -g, 0) * dt; // gravity
+		for (int j: neighbour[i]) {
+			a =  a + ((velocities[j] - velocities[i]) * viscosity_kernel_laplacian(dist(particles[i], particles[i]), radius) * mass[j]);
+			b = 
+		}
+		tmp = tmp + (a * visc * dt); //viscosity
+		tmp = tmp + (b * dt); // surface tension
+		vel.push_back(velocities[i] + tmp);
+	}
+	return (vel);
+}
+
 int main(int ac, char **av) {
 	std::deque<Vector3d> particles;
+	std::deque<Vector3d> velocities;
 	std::map<int, std::deque<int>> neighbour;
+	std::deque<float> mass;
 	std::map<int, float> alphas;
 	std::map<int, float> densities;
+	std::deque<Vector3d> tmpVel;
 
 	// max x y z
 	float xm = 100, ym = 100, zm = 100;
@@ -348,16 +370,36 @@ int main(int ac, char **av) {
 		}
 		std::getline(datas, val);
 		particles.push_back(Vector3d(x, y, z));
+		velocities.push_back(Vector3d(0, 0, 0));
+		mass.push_back(10e-3);
 	}
 	datas.close();
 
 	std::cout << particles.size() << std::endl;
 
+	// step 1: update neighborhodd
 	neighbour = getNeighbour(particles);
+	// step 2: compute density and alpha
 	densities = getDensity(neighbour,  particles);
 	alphas = getAlpha(neighbour, particles);
 	/*
 	for (std::pair<int, float> al: alphas) {
 		std::cout << al.first << " : " << al.second << std::endl;
 	}*/
+	// step 4: compute forces
+	tmpVel = ComputeForces(neighbour, particles, mass, 9.81, velocities);
+
+	// step 5: update deltaT
+
+	// step 6: compute velocitie
+
+	// step 7: correct density error
+
+	// step 8: update pos
+
+	// step 9: correct divergence error
+
+	// step 10: update velocities
+
+	// step 11: save frame;
 }
