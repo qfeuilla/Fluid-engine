@@ -104,6 +104,6 @@ I have done the computation for rho and for alpha, now I have to compute the ext
 I have read that Cubic Spline Kernel is less computationaly expensive so I will use that instead of gaussian kernel.
 https://www.sciencedirect.com/science/article/pii/S0307904X13007920 -> more precisions about kernels
 
-### 16/03/2020
+### 17/03/2020
 
 I have found a book that seems more intresting on fluid simulation and that seems less confuse -> Fluid Simulation for Computer Graphics. So i will focus on understanding it and I'll try to use it to do my own implementation. I have also understand that DFSPH is a too complex algorithm for me for the moment so I will start by implement easier algorithm, and next I will improve it, step by step. 
