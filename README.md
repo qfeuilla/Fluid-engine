@@ -107,3 +107,7 @@ https://www.sciencedirect.com/science/article/pii/S0307904X13007920 -> more prec
 ### 17/03/2020
 
 I have found a book that seems more intresting on fluid simulation and that seems less confuse -> Fluid Simulation for Computer Graphics. So i will focus on understanding it and I'll try to use it to do my own implementation. I have also understand that DFSPH is a too complex algorithm for me for the moment so I will start by implement easier algorithm, and next I will improve it, step by step. 
+
+### 19/03/2020
+
+I have jump back in the first book I've talk about, and now that I have better understand the core of the SPH simulation I found it realy clear and good. So I have decided to come back to it and to try to implement a 2D SPH simulation in the branch tests, in 2D_SPH_from_beginning.
