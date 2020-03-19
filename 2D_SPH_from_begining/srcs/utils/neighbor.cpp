@@ -1,4 +1,4 @@
-#include "neighbor.hpp"
+#include "../../includes/sph.h"
 
 int			vecToIndex(Vector2D p) {
 	return (static_cast<int>(std::floor(p.x) + std::floor(p.y) * xmh));
@@ -66,17 +66,18 @@ float dist(Vector2D a, Vector2D b) {
 	return (std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2)));
 }
 
-std::map<int, std::deque<int>> getNeighbour(std::deque<Vector2D> particles) {
+std::deque<std::deque<int>> getNeighbors(std::deque<Vector2D> particles) {
 	long int indice;
 	int type;
 	std::map<long int, std::deque<int>> buckets;
 	std::map<int, std::map<int, std::deque<int>>> types;
-	std::map<int, std::deque<int>> neighbour;
+	std::deque<std::deque<int>> neighbour;
 	std::deque<int> group;
 	float x,y;
 	Vector2D tmp;
-	float doi = 1; // distance of interaction
 	int part_index = 0;
+
+	neighbour.resize(particles.size());
 
 	for(Vector2D p: particles) {
 		tmp = Vector2D(p.x / h, p.y / h);
@@ -95,7 +96,7 @@ std::map<int, std::deque<int>> getNeighbour(std::deque<Vector2D> particles) {
 			for (int particle: groups.second) {
 				for (int g: group) {
 					for (int possible: buckets[g]) {
-						if (dist(particles[possible], particles[particle]) < doi) {
+						if (dist(particles[possible], particles[particle]) < doi && particle != possible) {
 							neighbour[particle].push_back(possible);
 						}
 					}
@@ -103,14 +104,5 @@ std::map<int, std::deque<int>> getNeighbour(std::deque<Vector2D> particles) {
 			}
 		}
 	}
-	/*
-	for (std::pair<int, std::deque<int>> neig: neighbour) {
-		std::cout << neig.first << " : ";
-		for (int part: neig.second) {
-			std::cout << part << " ";
-		}
-		std::cout << std::endl;
-	}*/
-
 	return (neighbour);
 }

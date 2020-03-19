@@ -18,19 +18,41 @@ public:
 
     float       x, y;
 
-    Vector2D    operator+(Vector2D &const a) {
+    Vector2D    operator+(const Vector2D& a) const {
         return (Vector2D(x + a.x, y + a.y));
     }
-    Vector2D    operator+(Vector2D &const a) {
+    
+    Vector2D    operator-(const Vector2D& a) const {
         return (Vector2D(x - a.x, y - a.y));
     }
-    Vector2D    operator*(float a) {
+
+    Vector2D    operator*(const float a) const {
         return (Vector2D(x * a, y * a));
     }
-    Vector2D    operator/(float a) {
+
+    Vector2D    operator/(const float a) const {
         return (Vector2D(x / a, y / a));
     }
-    float       dot(Vector2D &const a) {
+
+    Vector2D    operator+=(const float a) const {
+        return (Vector2D(x + a, y + a));
+    }
+
+    Vector2D    operator-=(const float a) const {
+        return (Vector2D(x - a, y - a));
+    }
+
+    void    operator+=(const Vector2D& a) {
+        this->x += a.x;
+        this->y += a.y;
+    }
+
+    void    operator-=(const Vector2D& a) {
+        this->x -= a.x;
+        this->y -= a.y;
+    }
+
+    float       dot(const Vector2D& a) const {
         return (x * a.x + y * a.y);
     }
 };

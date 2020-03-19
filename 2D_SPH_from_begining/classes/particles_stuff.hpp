@@ -12,8 +12,8 @@ public:
 
     ParticleSystemData2(const VectorArray& positions) : _positions(positions) {
         _neighbors.resize(_positions.size());
-        _velocities.resize(_positions.size());
-        _forces.resize(_positions.size());
+        _velocities.resize(_positions.size(), Vector2D(0, 0));
+        _forces.resize(_positions.size(), Vector2D(0, 0));
     }
     virtual ~ParticleSystemData2() {}
 
@@ -38,7 +38,6 @@ public:
         _neighbors = getNeighbors(_positions);
     }
 
-private:
     VectorArray _positions;
     VectorArray _velocities;
     VectorArray _forces;
