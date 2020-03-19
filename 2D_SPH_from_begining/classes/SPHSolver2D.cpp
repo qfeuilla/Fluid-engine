@@ -1,7 +1,7 @@
 
 #include "../includes/sph.h"
 
-void SPHSolver2D::advanceTimeStep(float advance_time) {
+void SPHSolver2D::advanceTimeStep(double advance_time) {
     beginAdvanceTimeStep(); // preprocess for the Algorithm
 
     accumulateForces(advance_time);
@@ -11,11 +11,11 @@ void SPHSolver2D::advanceTimeStep(float advance_time) {
     endAdvanceTimeStep(); // postprocess for the Algorithm
 }
 
-void SPHSolver2D::accumulateForces(float advance_time) {
+void SPHSolver2D::accumulateForces(double advance_time) {
     accumulateExternalForces(advance_time);
 }
 
-void SPHSolver2D::accumulateExternalForces(float advance_time) {
+void SPHSolver2D::accumulateExternalForces(double advance_time) {
     Vector2D force;
     Vector2D relativeVel;
     size_t n = particle_datas.numberOfParticles();
@@ -47,7 +47,7 @@ void SPHSolver2D::endAdvanceTimeStep() {
     }
 }
 
-void SPHSolver2D::timeIntegration(float timeIntervalInSeconds) {
+void SPHSolver2D::timeIntegration(double timeIntervalInSeconds) {
     size_t n = particle_datas.numberOfParticles();
     auto forces = particle_datas._forces;
     auto velocities = particle_datas._velocities;
@@ -59,7 +59,7 @@ void SPHSolver2D::timeIntegration(float timeIntervalInSeconds) {
     }
 }
 
-void SPHSolver2D::resolveCollision(float timeIntervalInSeconds) {
+void SPHSolver2D::resolveCollision(double timeIntervalInSeconds) {
     //resolve border Collision for the moment
     size_t n = particle_datas.numberOfParticles();
 
@@ -117,8 +117,8 @@ void SPHSolver2D::saveActualState() {
     }
 }
 
-void SPHSolver2D::runSimulation(float timeOfSimulation) {
-    float timeToAdvance = 1 / fps;
+void SPHSolver2D::runSimulation(double timeOfSimulation) {
+    double timeToAdvance = 1 / fps;
 
     while (actual_time_seconds < timeOfSimulation) {
         advanceTimeStep(timeToAdvance);

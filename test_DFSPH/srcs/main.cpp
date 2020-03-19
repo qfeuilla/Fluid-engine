@@ -199,7 +199,7 @@ std::deque<int>     getCellGroup(int type, int cell) {
 	return (group);
 }
 
-float dist(Vector3d a, Vector3d b) {
+double dist(Vector3d a, Vector3d b) {
 	return (std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2) + std::pow(a.z - b.z, 2)));
 }
 
@@ -210,9 +210,9 @@ std::map<int, std::deque<int>> getNeighbour(std::deque<Vector3d> particles) {
 	std::map<int, std::map<int, std::deque<int>>> types;
 	std::map<int, std::deque<int>> neighbour;
 	std::deque<int> group;
-	float x,y,z;
+	double x,y,z;
 	Vector3d tmp;
-	float doi = 1; // distance of interaction
+	double doi = 1; // distance of interaction
 	int part_index = 0;
 
 	for(Vector3d p: particles) {
@@ -255,8 +255,8 @@ std::map<int, std::deque<int>> getNeighbour(std::deque<Vector3d> particles) {
 
 #define PI 355/113
 
-float CubicSplineFuncion(float s, float h) {
-    float alphad;
+double CubicSplineFuncion(double s, double h) {
+    double alphad;
 
 	alphad = 1 / (4 * PI * std::pow(h,3));
 	if (s >= 0 && s < 1)
@@ -268,8 +268,8 @@ float CubicSplineFuncion(float s, float h) {
 	}
 }
 
-float CubicSplineFuncionGrad(float s, float h) {
-    float alphad;
+double CubicSplineFuncionGrad(double s, double h) {
+    double alphad;
 
 	alphad = 1 / (4 * PI * std::pow(h,3));
 	if (s >= 0 && s < 1)
@@ -281,12 +281,12 @@ float CubicSplineFuncionGrad(float s, float h) {
 	}
 }
 
-std::map<int, float> getAlpha(std::map<int, std::deque<int>> neig, std::deque<Vector3d> particules) {
-    float sum1;
-	float sum2;
-	float gauss;
+std::map<int, double> getAlpha(std::map<int, std::deque<int>> neig, std::deque<Vector3d> particules) {
+    double sum1;
+	double sum2;
+	double gauss;
 
-    std::map<int, float> ret;
+    std::map<int, double> ret;
 
     for (std::pair<int, std::deque<int>> particule : neig) {
         sum1 = 0;
@@ -301,9 +301,9 @@ std::map<int, float> getAlpha(std::map<int, std::deque<int>> neig, std::deque<Ve
     return(ret);
 }
 
-std::map<int, float> getDensity(std::map<int, std::deque<int>> neig, std::deque<Vector3d> particules) {
-    float sum;
-    std::map<int, float> ret;
+std::map<int, double> getDensity(std::map<int, std::deque<int>> neig, std::deque<Vector3d> particules) {
+    double sum;
+    std::map<int, double> ret;
 
     for (std::pair<int, std::deque<int>> particule : neig) {
         sum = 0;
@@ -315,11 +315,11 @@ std::map<int, float> getDensity(std::map<int, std::deque<int>> neig, std::deque<
     return(ret);
 }
 
-float viscosity_kernel_laplacian(float r, float radius) {
+double viscosity_kernel_laplacian(double r, double radius) {
 	return (r <= radius) ? (45.0f * (radius - r) / (PI * powf(radius, 6))) : 0.0f;
 }
 
-std::deque<Vector3d> ComputeForces(std::map<int, std::deque<int>> neighbour, std::deque<Vector3d> particles, std::deque<float> mass, float g, std::deque<Vector3d> velocities) {
+std::deque<Vector3d> ComputeForces(std::map<int, std::deque<int>> neighbour, std::deque<Vector3d> particles, std::deque<double> mass, double g, std::deque<Vector3d> velocities) {
 	std::deque<Vector3d> vel;
 	Vector3d a;
 	Vector3d b;
@@ -329,7 +329,6 @@ std::deque<Vector3d> ComputeForces(std::map<int, std::deque<int>> neighbour, std
 		tmp = Vector3d(0, -g, 0) * dt; // gravity
 		for (int j: neighbour[i]) {
 			a =  a + ((velocities[j] - velocities[i]) * viscosity_kernel_laplacian(dist(particles[i], particles[i]), radius) * mass[j]);
-			b = 
 		}
 		tmp = tmp + (a * visc * dt); //viscosity
 		tmp = tmp + (b * dt); // surface tension
@@ -342,14 +341,14 @@ int main(int ac, char **av) {
 	std::deque<Vector3d> particles;
 	std::deque<Vector3d> velocities;
 	std::map<int, std::deque<int>> neighbour;
-	std::deque<float> mass;
-	std::map<int, float> alphas;
-	std::map<int, float> densities;
+	std::deque<double> mass;
+	std::map<int, double> alphas;
+	std::map<int, double> densities;
 	std::deque<Vector3d> tmpVel;
 
 	// max x y z
-	float xm = 100, ym = 100, zm = 100;
-	float x,y,z;
+	double xm = 100, ym = 100, zm = 100;
+	double x,y,z;
 
 	std::ifstream datas("scene/scene1.txt");
 	std::string val;
@@ -383,7 +382,7 @@ int main(int ac, char **av) {
 	densities = getDensity(neighbour,  particles);
 	alphas = getAlpha(neighbour, particles);
 	/*
-	for (std::pair<int, float> al: alphas) {
+	for (std::pair<int, double> al: alphas) {
 		std::cout << al.first << " : " << al.second << std::endl;
 	}*/
 	// step 4: compute forces

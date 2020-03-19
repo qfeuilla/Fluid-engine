@@ -41,6 +41,7 @@ public:
     VectorArray _positions;
     VectorArray _velocities;
     VectorArray _forces;
+    std::deque<double> _densities;
     std::deque<std::deque<int>> _neighbors;
 };
 

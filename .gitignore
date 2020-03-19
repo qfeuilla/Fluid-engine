@@ -4,7 +4,7 @@
 mass spring/.vscode/c_cpp_properties.json
 test_neigbour_search/scene/scene1.txt
 SPH_from_begining/scene/scene1.txt
-2D_SPH_from_begining/render/values/*
+2D_SPH_from_begining/render/values/*.txt
 2D_SPH_from_begining/scene/scene1.txt
 2D_SPH_from_begining/srcs/a.exe
 2D_SPH_from_begining/render/video/spring_animation.mp4

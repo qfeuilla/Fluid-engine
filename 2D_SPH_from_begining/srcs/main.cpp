@@ -5,7 +5,7 @@ int main(int ac, char **av) {
     std::deque<Vector2D> particles;
     std::deque<int> tmp;
 
-	float x,y;
+	double x,y;
 
 	std::ifstream datas("../scene/scene1.txt");
 	std::string val;

@@ -1,11 +1,11 @@
 #include "../../includes/sph.h"
 
 int			vecToIndex(Vector2D p) {
-	return (static_cast<int>(std::floor(p.x) + std::floor(p.y) * xmh));
+	return (static_cast<int>(std::floor(p.x) + std::floor(p.y) * xms));
 }
 
 Vector2D	indexToVector(int p) {
-	return (Vector2D(static_cast<int>((p + 1) % xmh), static_cast<int>((p + 1) / xmh)));
+	return (Vector2D(static_cast<int>((p + 1) % xms), static_cast<int>((p + 1) / xms)));
 }
 
 std::deque<int>     getCellGroup(int type, int cell) {
@@ -62,7 +62,7 @@ std::deque<int>     getCellGroup(int type, int cell) {
 	return (group);
 }
 
-float dist(Vector2D a, Vector2D b) {
+double dist(Vector2D a, Vector2D b) {
 	return (std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2)));
 }
 
@@ -73,14 +73,14 @@ std::deque<std::deque<int>> getNeighbors(std::deque<Vector2D> particles) {
 	std::map<int, std::map<int, std::deque<int>>> types;
 	std::deque<std::deque<int>> neighbour;
 	std::deque<int> group;
-	float x,y;
+	double x,y;
 	Vector2D tmp;
 	int part_index = 0;
 
 	neighbour.resize(particles.size());
 
 	for(Vector2D p: particles) {
-		tmp = Vector2D(p.x / h, p.y / h);
+		tmp = Vector2D(p.x / s, p.y / s);
 		indice = vecToIndex(tmp);
 		x = std::round(std::fmod(tmp.x, 1) * 2);
 		y = std::round(std::fmod(tmp.y, 1) * 2);
