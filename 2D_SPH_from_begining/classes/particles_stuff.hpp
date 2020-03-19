@@ -38,6 +38,40 @@ public:
         _neighbors = getNeighbors(_positions);
     }
 
+    Vector2D interpolate(int originIndex, VectorArray values) {
+        Vector2D sum;
+        double distance;
+        double weight;
+
+        for (int n: _neighbors[originIndex]) {
+            distance = dist(_positions[originIndex], _positions[n]);
+            weight = pm / _densities[n] * stdKernel(distance);
+            sum += values[n] * weight;
+        }
+        return (sum);
+    }
+
+    double sumOfKernelNearby(int originIndex) {
+        double sum = 0;
+        double distance;
+
+        for (int n: _neighbors[originIndex]) {
+            distance = dist(_positions[originIndex], _positions[n]);
+            sum += stdKernel(distance);
+        }
+        return (sum);
+    }
+
+    void    compute_densities() {
+        size_t n = numberOfParticles();
+        double sum;
+
+        for (int i = 0; i < n; i++) {
+            sum = sumOfKernelNearby(i);
+            _densities[i] = pm * sum;
+        }
+    }
+
     VectorArray _positions;
     VectorArray _velocities;
     VectorArray _forces;

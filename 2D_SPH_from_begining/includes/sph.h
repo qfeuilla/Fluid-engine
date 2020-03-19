@@ -47,5 +47,6 @@ public:
 };
 
 double stdKernel(double r);
+double dist(Vector2D a, Vector2D b);
 
 #endif
