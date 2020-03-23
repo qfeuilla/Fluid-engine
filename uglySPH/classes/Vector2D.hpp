@@ -63,6 +63,12 @@ public:
     double       dot(const Vector2D& a) const {
         return (x * a.x + y * a.y);
     }
+
+    Vector2D    normalized() {
+        float len;
+        len = (std::sqrt(x * x + y * y));
+        return (Vector2D(x / len, y / len));
+    }
 };
 
 #endif

@@ -8,13 +8,13 @@ import matplotlib.animation as manimation
 FFMpegWriter = manimation.writers['ffmpeg']
 metadata = dict(title='Movie Test', artist='Matplotlib',
                 comment='Movie support!')
-writer = FFMpegWriter(fps=30, metadata=metadata)
+writer = FFMpegWriter(fps=20, metadata=metadata)
 
 fig = plt.figure()
 l, = plt.plot([], [], 'o')
 
-plt.xlim(-100, 150)
-plt.ylim(-100, 150)
+plt.xlim(-10, 1000)
+plt.ylim(-10, 1000)
 
 dir = './values/'
 files = os.listdir(dir)

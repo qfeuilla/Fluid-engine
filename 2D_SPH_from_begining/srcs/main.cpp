@@ -39,7 +39,7 @@ int main(int ac, char **av) {
 
     SPHSolver2D solver = SPHSolver2D(particle_datas, 30);
 
-    solver.runSimulation(5);
+    solver.runSimulation(20);
 
 /*
     for (int i = 0; i < particle_datas.numberOfParticles(); i++) {

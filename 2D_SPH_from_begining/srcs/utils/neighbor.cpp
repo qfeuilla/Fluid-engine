@@ -62,10 +62,6 @@ std::deque<int>     getCellGroup(int type, int cell) {
 	return (group);
 }
 
-double dist(Vector2D a, Vector2D b) {
-	return (std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2)));
-}
-
 std::deque<std::deque<int>> getNeighbors(std::deque<Vector2D> particles) {
 	long int indice;
 	int type;
@@ -73,7 +69,7 @@ std::deque<std::deque<int>> getNeighbors(std::deque<Vector2D> particles) {
 	std::map<int, std::map<int, std::deque<int>>> types;
 	std::deque<std::deque<int>> neighbour;
 	std::deque<int> group;
-	double x,y;
+	double x, y;
 	Vector2D tmp;
 	int part_index = 0;
 
@@ -89,14 +85,13 @@ std::deque<std::deque<int>> getNeighbors(std::deque<Vector2D> particles) {
 		types[indice][type].push_back(part_index++);
 	}
 
-
 	for (std::pair<int, std::deque<int>> cell: buckets) {
 		for (std::pair<int, std::deque<int>> groups: types[cell.first]) {
 			group = getCellGroup(groups.first, cell.first);
 			for (int particle: groups.second) {
 				for (int g: group) {
 					for (int possible: buckets[g]) {
-						if (dist(particles[possible], particles[particle]) < doi && particle != possible) {
+						if (dist(particles[possible], particles[particle]) < (doi * doi) && possible != particle) {
 							neighbour[particle].push_back(possible);
 						}
 					}
