@@ -114,4 +114,8 @@ I have jump back in the first book I've talk about, and now that I have better u
 
 ### 23/03/2020
 
-It's been a couple of day that I have a realy hard time to implement the 2D simulation, I have understand each step, but I have a huge problem. When particles don't have neighbor, the density I store for this particule is 0. And I alway endup by having a division by zero. furthermore, the force is too strong and everythinbg explode. So I have found a SPH simulator that is realy short to start with a realy easy and fonctiuon SPH simulator at https://github.com/bigthetaio/mueller-sph/ , and I will update it step by step to find where the isue is. First I have to add the neighbor search algorithm, then the kernels formula, update the pressure calculation, do smoothing viscosity and finally, optimize everything.
+It's been a couple of day that I have a realy hard time to implement the 2D simulation, I have understand each step, but I have a huge problem. When particles don't have neighbor, the density I store for this particule is 0. And I alway endup by having a division by zero. furthermore, the force is too strong and everythinbg explode. So I have found a SPH simulator that is realy short to start with a realy easy and fonctiuon SPH simulator at https://github.com/bigthetaio/mueller-sph/ , and I will update it step by step to find where the isue is. First I have to add the neighbor search algorithm, then the kernels formula, update the pressure calculation, do smoothing viscosity and finally, optimize everything. (Implementation on uglySPH at tests branch)
+
+### 25/03/2020 
+
+I have used my first neighbor search algorithm and it totaly destroy the algorithm in uglySPH. So I think here is a probleme and I have to find another way to compute neighbors. I have found this article https://arxiv.org/abs/1910.02639?. It looks like there algorithm is really fast so I'll try to use it.
