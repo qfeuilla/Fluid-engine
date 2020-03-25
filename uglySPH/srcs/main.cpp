@@ -1,9 +1,63 @@
 #include "../includes/sph.h"
 
+
+void computeNeighbors() {
+	std::map<int, std::deque<int>> buckets;
+	std::map<int, std::map<int, std::deque<int>>> types;
+	std::deque<int> group;
+	int indice, type, part_index = 0;
+	double x, y;
+
+	// first step, fill buckets and underBuckets
+	for (Particle p: particles) {
+		indice = vecToIndex(p.x);
+		x = std::round(std::fmod(p.x.x / H, 1) * 2);
+		y = std::round(std::fmod(p.x.y / H, 1) * 2);
+		type = static_cast<long int>(x + y * 3);
+		//std::cout << x << " " << p.x.x / H << " " << p.x.x << " " << p.x.y << " " << y << " " << type << std::endl;
+		buckets[indice].push_back(part_index);
+		types[indice][type].push_back(part_index++);
+	}
+
+	neighbors.clear();
+	neighbors.resize(particles.size());
+	for (std::pair<int, std::deque<int>> cell: buckets) {
+		for (std::pair<int, std::deque<int>> groups: types[cell.first]) {
+			group = getCellGroup(groups.first, cell.first);
+			for (int particle: groups.second) {
+				for (int g: group) {
+					for (int possible: buckets[g]) {
+						auto pj = particles[possible];
+						auto pi = particles[particle];
+						Vector2D rij = pj.x - pi.x;
+						if (rij.dot(rij) < HSQ) {
+							neighbors[particle].push_back(possible);
+						}
+					}
+				}
+			}
+		}
+	}
+	/*
+	neighbors.clear();
+	neighbors.resize(particles.size());
+	for (int i = 0; i < particles.size(); i++) {
+		auto pi = particles[i];
+		for (int j = 0; j < particles.size(); j++) {
+			auto pj = particles[j];
+			Vector2D rij = pj.x - pi.x;
+			if (rij.dot(rij) < HSQ) {
+				neighbors[i].push_back(j);
+			}
+		}
+	}*/
+}
+
 void InitSPH(void)
 {
-    /*
     double x,y;
+
+	cout << "initializing particles" << endl;
 
 	std::ifstream datas("../scene/scene1.txt");
 	std::string val;
@@ -24,15 +78,7 @@ void InitSPH(void)
         
 		particles.push_back(Particle(x, y));
 	}
-	datas.close();*/
-	cout << "initializing dam break with " << DAM_PARTICLES << " particles" << endl;
-	for(float y = EPS; y < VIEW_HEIGHT-EPS*2.f; y += H)
-		for(float x = VIEW_WIDTH/4; x <= VIEW_WIDTH/2; x += H)
-			if(particles.size() < DAM_PARTICLES)
-			{
-				float jitter = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-				particles.push_back(Particle(x+jitter,y));
-			}
+	datas.close();
 }
 
 void Integrate(void)
@@ -40,7 +86,7 @@ void Integrate(void)
 	for(auto &p : particles)
 	{
 		// forward Euler integration
-		p.v += p.f/p.rho * DT;
+		p.v += p.f/p.rho* DT;
 		p.x += p.v * DT;
 
 		// enforce boundary conditions
@@ -70,46 +116,47 @@ void Integrate(void)
 
 void ComputeDensityPressure(void)
 {
-	for(auto &pi : particles)
+	for(int i = 0; i < particles.size(); i++)
 	{
+		auto& pi = particles[i];
+		bool ok = false;
 		pi.rho = 0.f;
-		for(auto &pj : particles)
+		for(int j: neighbors[i])
 		{
+			auto& pj = particles[j];
 			Vector2D rij = pj.x - pi.x;
 			float r2 = rij.dot(rij);
 
-			if(r2 < HSQ)
-			{
-				// this computation is symmetric
-				pi.rho += MASS*POLY6*pow(HSQ-r2, 3.f);
-			}
+			ok = true;
+			// this computation is symmetric
+			pi.rho += MASS*POLY6*pow(HSQ-r2, 3.f) ;
 		}
-		pi.p = GAS_CONST*(pi.rho - REST_DENS);
+		if (!ok) 
+			pi.rho = 0.1;
+		pi.p = GAS_CONST*(pi.rho - REST_DENS) * 1.5;
+		//std::cout << pi.rho << std::endl;
 	}
 }
 
 
 void ComputeForces(void)
 {
-	for(auto &pi : particles)
+	for(int i = 0; i < particles.size(); i++)
 	{
+		auto& pi = particles[i];
 		Vector2D fpress(0.f, 0.f);
 		Vector2D fvisc(0.f, 0.f);
-		for(auto &pj : particles)
+		for(int j: neighbors[i])
 		{
-			if(&pi == &pj)
-				continue;
-
+			if (i == j)
+				continue ;
+			auto& pj = particles[j];
 			Vector2D rij = pj.x - pi.x;
 			float r = sqrt(rij.dot(rij));
-
-			if(r < H)
-			{
-				// compute pressure force contribution
-				fpress += rij.normalized()*MASS*(pi.p + pj.p)/(2.f * pj.rho) * SPIKY_GRAD*pow(H-r,2.f) * -1;
-				// compute viscosity force contribution
-				fvisc += (pj.v - pi.v)/pj.rho * VISC_LAP*(H-r)*MASS * VISC;
-			}
+			// compute pressure force contribution
+			fpress += rij.normalized()*MASS*(pi.p + pj.p)/(2.f * pj.rho) * SPIKY_GRAD*pow(H-r,2.f) * -1;
+			// compute viscosity force contribution
+			fvisc += (pj.v - pi.v)/pj.rho * VISC_LAP*(H-r)*MASS * VISC;
 		}
 		Vector2D fgrav = G * pi.rho;
 		pi.f = fpress + fvisc + fgrav;
@@ -144,7 +191,8 @@ void saveActualState() {
 }
 
 void Update(bool disp)
-{ 
+{
+	computeNeighbors();
 	ComputeDensityPressure();
  	ComputeForces();
  	Integrate();
@@ -153,14 +201,22 @@ void Update(bool disp)
     if (disp) {
         saveActualState();
         frameIndex++;
-        std::cout << actualTime << std::endl;
+		if (!movingMax && VIEW_WIDTH - 10 > 600)
+			VIEW_WIDTH -= 30;
+		else if (!movingMax)
+			movingMax = true;
+		else if (VIEW_WIDTH + 10 < 1000)
+			VIEW_WIDTH += 30;
+		else
+			movingMax = false;
+		std::cout << actualTime << std::endl;
     }
     actualTime += DT;
 }
 
 int main() {
     float fps = 60;
-    float simTime = 3;
+    float simTime = 10;
     float stepDuration = 1 / fps;
     bool disp;
 

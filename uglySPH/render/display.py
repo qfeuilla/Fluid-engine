@@ -8,7 +8,7 @@ import matplotlib.animation as manimation
 FFMpegWriter = manimation.writers['ffmpeg']
 metadata = dict(title='Movie Test', artist='Matplotlib',
                 comment='Movie support!')
-writer = FFMpegWriter(fps=20, metadata=metadata)
+writer = FFMpegWriter(fps=15, metadata=metadata)
 
 fig = plt.figure()
 l, = plt.plot([], [], 'o')

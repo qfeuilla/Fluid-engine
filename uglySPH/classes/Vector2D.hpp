@@ -67,6 +67,8 @@ public:
     Vector2D    normalized() {
         float len;
         len = (std::sqrt(x * x + y * y));
+        if (len == 0)
+            return (Vector2D(0));
         return (Vector2D(x / len, y / len));
     }
 };
